@@ -30,7 +30,7 @@ class App(tk.Tk):
 
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame(Dashboard)
+        self.show_frame(Login)
 
     def show_frame(self, page_number):
 
@@ -52,7 +52,6 @@ class Login(tk.Frame):
         leftcolor = tk.Label(self,height = 600,width = 1350, bg="grey17")
         leftcolor.place(x=0,y=0)
 
-        
         login = StringVar()
         password = StringVar()
         
@@ -82,6 +81,8 @@ class Login(tk.Frame):
                 if cur.fetchone() is not None:
                     tkinter.messagebox.showinfo("Book Rental System", "Login Successfully")
                     controller.show_frame(Dashboard)
+                    login.set('')
+                    password.set('')
                 else:
                     tkinter.messagebox.showerror("Book Rental System", "Invalid password or username")
             conn.commit() 
@@ -1647,7 +1648,7 @@ class History(tk.Frame):
         #### Buttons
         
         self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 17),  bd=0)
-        self.btnSearchBook.place(x=1300,y=109)
+        self.btnSearchBook.place(x=1270,y=109)
         self.btnSearchBook.config(cursor= "hand2")
         
         self.btnShowallBook = Button(self, text="SHOW ALL", font=('Poppins', 11), height=1, width=10, bd=1, 
