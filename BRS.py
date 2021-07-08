@@ -578,17 +578,20 @@ class Books(tk.Frame):
         Status = StringVar()
 
         def addBook():
-            conn = sqlite3.connect("BRS.db")
-            c = conn.cursor()         
-            c.execute("INSERT INTO books(BookNumber, ISBN, Title, Author, Genre, Status) VALUES (?,?,?,?,?,'Available')",\
-                      (BookNumber.get(),ISBN.get(),Title.get(),Author.get(), Genre.get()))
-            c.execute("INSERT INTO booksavailable(BookNumber, ISBN, Title, Author, Genre) VALUES (?,?,?,?,?)",\
-                      (BookNumber.get(),ISBN.get(),Title.get(),Author.get(), Genre.get()))
-            conn.commit()           
-            conn.close()
-            clear()
-            tkinter.messagebox.showinfo("Book Rental System", "Book added to database")
-            displayBook()
+            if BookNumber.get() == "" or ISBN.get() == "" or Title.get() == "" or Author.get() == "" or Genre.get() == "":
+                tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
+            else:
+                conn = sqlite3.connect("BRS.db")
+                c = conn.cursor()         
+                c.execute("INSERT INTO books(BookNumber, ISBN, Title, Author, Genre, Status) VALUES (?,?,?,?,?,'Available')",\
+                          (BookNumber.get(),ISBN.get(),Title.get(),Author.get(), Genre.get()))
+                c.execute("INSERT INTO booksavailable(BookNumber, ISBN, Title, Author, Genre) VALUES (?,?,?,?,?)",\
+                          (BookNumber.get(),ISBN.get(),Title.get(),Author.get(), Genre.get()))
+                conn.commit()           
+                conn.close()
+                clear()
+                tkinter.messagebox.showinfo("Book Rental System", "Book added to database")
+                displayBook()
             
         def returnbook():
             conn = sqlite3.connect("BRS.db")
@@ -887,8 +890,6 @@ class Books(tk.Frame):
              
         displayBook()
 
-
-
 class Genres(tk.Frame):
 
      def __init__(self, parent, controller):
@@ -1013,8 +1014,6 @@ class Genres(tk.Frame):
             for row in rows:
                 if row[4].count(search):
                     self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-            
-            
             con.close()
             
         def OnDoubleClick2(event):
@@ -1228,19 +1227,20 @@ class Order(tk.Frame):
                             booknum =BookNumber.get()
                             for row in rows:
                                 cur2.execute("DELETE FROM booksavailable WHERE BookNumber = ?",(booknum,))    
-                            conn.commit()           
-                            conn.close()
+                            conn.commit() 
                             clear()
                             tkinter.messagebox.showinfo("Book Rental System", "Order added to database")
                             displayOrder()
                         except:
-                            tkinter.messagebox.showerror("Book Rental System", "Borrower's ID does not exists") 
+                            tkinter.messagebox.showerror("Book Rental System", "Borrwer's ID not exist")
                             
                     elif book[0] == BookNumber.get() and book[5] == 'Unavailable':
                         tkinter.messagebox.showerror("Book Rental System", "Book Unavailable")   
                         pass
                     else:
                         pass
+                          
+                conn.close()
                     
         def displayOrder():
             self.orderlist.delete(*self.orderlist.get_children())
@@ -1501,7 +1501,6 @@ class Order(tk.Frame):
         self.btnShowallBook.config(cursor= "hand2")
                    
         displayOrder()
-        
        
 class History(tk.Frame):
 
@@ -2024,15 +2023,28 @@ class Borrowers(tk.Frame):
         ##Functions
         def addBorrower():
             conn = sqlite3.connect("BRS.db")
-            c = conn.cursor()         
-            c.execute("INSERT INTO borrower(BorrowerIDNum, ValidID, Name, EmailAdd, PhoneNum) VALUES (?,?,?,?,?)",\
-                      (BorrowerIDNum.get(),ValidID.get(),Name.get(),EmailAdd.get(), PhoneNum.get()))
-            conn.commit()           
-            conn.close()
-            clear()
-            tkinter.messagebox.showinfo("Book Rental System", "Borrower has been recorded")
-            displayBorrower()
-            
+            c = conn.cursor()
+            c2 = conn.cursor()
+            c2.execute("SELECT * FROM borrower")
+            borrowers = c2.fetchall()
+            list_of_valid_ids = []
+            for borrower in borrowers:
+                list_of_valid_ids.append(borrower[1])
+                
+            if ValidID.get() not in list_of_valid_ids:
+                try:      
+                    c.execute("INSERT INTO borrower(BorrowerIDNum, ValidID, Name, EmailAdd, PhoneNum) VALUES (?,?,?,?,?)",\
+                              (BorrowerIDNum.get(),ValidID.get(),Name.get(),EmailAdd.get(), PhoneNum.get()))
+                    conn.commit()           
+                    conn.close()
+                    clear()
+                    tkinter.messagebox.showinfo("Book Rental System", "Borrower has been recorded")
+                    displayBorrower()
+                except:
+                    tkinter.messagebox.showerror("Book Rental System", "Borrower already recorded")
+            else:
+                tkinter.messagebox.showerror("Book Rental System", "Valid ID already recorded")
+                
         def displayBorrower():
             self.borrower.delete(*self.borrower.get_children())
             conn = sqlite3.connect("BRS.db")
@@ -2179,7 +2191,6 @@ class Borrowers(tk.Frame):
         button8.config(cursor= "hand2")
          
         booklist = tk.Label(self,height = 2,width = 108, bg="#89E894")
-        #booklist.place(x=710,y=160)
         
         self.borrower = ttk.Treeview(self,
                                         columns=("Borrower's ID","Valid ID", "Name", "Email Add", "Phone Number"),
