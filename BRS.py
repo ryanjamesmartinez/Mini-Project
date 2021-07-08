@@ -1695,23 +1695,52 @@ class Report(tk.Frame):
         DDate = StringVar()
         RDate = StringVar()
         
+        con = sqlite3.connect("BRS.db")
+        cur = con.cursor()
+        cur.execute("SELECT * FROM books")
+        books = cur.fetchall()
+        bookid = []
+        for book in books:
+             bookid.append(book[0])
+
+        cur.execute("SELECT * FROM borrower")
+        borrower=cur.fetchall()
+        bIDNum =[]
+        for b in borrower:
+            bIDNum.append(b[0])
+
+        cur.execute("SELECT * FROM borrower")
+        bor=cur.fetchall()
+        
+        bname =[]
+        """
+        for b in bor:
+            bname.append(b[2])
+        """
+        
         def addReport():
-            if BIDNum.get() == "" or Name.get() == "" or BNumber.get() == "" or BDate.get() == "" or DDate.get() == "" or RDate.get() == "":
+            if BIDNum.get() == "" or BNumber.get() == "" or BDate.get() == "" or DDate.get() == "" or RDate.get() == "":
                     tkinter.messagebox.showerror("Book Rental System", "Please fill in the box")
             else: 
-                try:
-                    conn = sqlite3.connect("BRS.db")
-                    cur = conn.cursor()   
-                    cur.execute("PRAGMA foreign_keys = ON")
-                    cur.execute("INSERT INTO report (BIDNum, Name, BookNumber, DateBorrowed, DueDate, ReturnDate) VALUES (?,?,?,?,?,?)",\
-                                  (BIDNum.get(), Name.get(),BNumber.get(), BDate.get(), DDate.get(),RDate.get()))      
-                    conn.commit()           
-                    conn.close()
-                    clear()
-                    tkinter.messagebox.showinfo("Book Rental System", "Added to Report")
-                    displayReport()
-                except:
-                    tkinter.messagebox.showerror("Book Rental System", "Book ID or Borrower's ID does not exists")
+                conn = sqlite3.connect("BRS.db")
+                cur = conn.cursor()
+                cur.execute("SELECT * FROM borrower")
+                borname = cur.fetchall()
+                Name = ""
+                for borrower in borname:
+                    if BIDNum.get() == borrower[0]:
+                        Name = borrower[2]
+                        try:
+                            cur.execute("PRAGMA foreign_keys = ON")
+                            cur.execute("INSERT INTO report (BIDNum, Name, BookNumber, DateBorrowed, DueDate, ReturnDate) VALUES (?,?,?,?,?,?)",\
+                                          (BIDNum.get(), Name,BNumber.get(), BDate.get(), DDate.get(),RDate.get()))      
+                            conn.commit()           
+                            conn.close()
+                            clear()
+                            tkinter.messagebox.showinfo("Book Rental System", "Added to Report")
+                            displayReport()
+                        except:
+                            tkinter.messagebox.showerror("Book Rental System", "Book ID or Borrower's ID does not exists")
               
         def displayReport():
             self.orderlist.delete(*self.orderlist.get_children())
@@ -1788,33 +1817,12 @@ class Report(tk.Frame):
             BDate.set(values[3])
             DDate.set(values[4])
             RDate.set(values[5])
-
+            
         def logout():
             iExit = tkinter.messagebox.askyesno("Book Rental Sysytem","Do you want to log-out?")
             if iExit > 0:
                 controller.show_frame(Login)
 
-        con = sqlite3.connect("BRS.db")
-        cur = con.cursor()
-        cur.execute("SELECT * FROM books")
-        books = cur.fetchall()
-        bookid = []
-        for book in books:
-             bookid.append(book[0])
-
-        cur.execute("SELECT * FROM borrower")
-        borrower=cur.fetchall()
-        bIDNum =[]
-        for b in borrower:
-            bIDNum.append(b[0])
-
-        cur.execute("SELECT * FROM borrower")
-        bor=cur.fetchall()
-        bname =[]
-        for b in bor:
-            bname.append(b[2])
-
-           
         ## Window Buttons
         
         button1 = tk.Button(self, text="⯀ DASHBOARD",font=("Century Gothic",13,"bold"),bd=0,
@@ -1910,41 +1918,35 @@ class Report(tk.Frame):
         lblorderlist = tk.Label(self, font = ("Century Gothic",15), padx=3,width = 92, height = 1,text="Report List", anchor=W, bg="#375971", fg="snow")
         lblorderlist.place(x=200,y=151)
         
-        self.lblValidID = Label(self, font=("Poppins", 12, "bold"), text="Borrower's ID Num:", padx=5, pady=5)
-        self.lblValidID.place(x=200,y=415)
-        self.txtValidID = ttk.Combobox(self,
+        self.lblBorrowerID = Label(self, font=("Poppins", 12, "bold"), text="Borrower's ID Num:", padx=5, pady=5)
+        self.lblBorrowerID.place(x=200,y=415)
+        self.txtBorrowerID = ttk.Combobox(self,
                                         values = bIDNum,
                                         state="readonly", font=("Poppins", 13), textvariable=BIDNum, width=38)
-        self.txtValidID.place(x=360,y=420)
+        self.txtBorrowerID.place(x=360,y=420)
         
-        self.lblIDNumber = Label(self, font=("Poppins", 12, "bold"), text="Name:", padx=5, pady=5)
-        self.lblIDNumber.place(x=200,y=455)
-        self.txtIDNumber =ttk.Combobox(self,
-                                        values = bname,
-                                        state="readonly", font=("Poppins", 13), textvariable=Name, width=38)
-        self.txtIDNumber.place(x=360,y=460)
+        self.lblBookNum = Label(self, font=("Poppins", 12, "bold"), text="Book Number:", padx=5, pady=5)
+        self.lblBookNum.place(x=200,y=455)
         
-        self.lblISBN = Label(self, font=("Poppins", 12, "bold"), text="Book Number:", padx=5, pady=5)
-        self.lblISBN.place(x=200,y=495)
-        self.txtISBN =ttk.Combobox(self,
+        self.txtBookNum =ttk.Combobox(self,
                                         values = bookid,
                                         state="readonly", font=("Poppins", 13), textvariable=BNumber, width=38)
-        self.txtISBN.place(x=360,y=500)
+        self.txtBookNum.place(x=360,y=460)
         
-        self.lblName = Label(self, font=("Poppins", 12, "bold"), text="Borrow Date:", padx=5, pady=5)
-        self.lblName.place(x=750,y=415)
-        self.txtName = DateEntry(self, font=("Poppins", 13), textvariable=BDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
-        self.txtName.place(x=890,y=420)
+        self.lblBDate = Label(self, font=("Poppins", 12, "bold"), text="Borrow Date:", padx=5, pady=5)
+        self.lblBDate.place(x=750,y=415)
+        self.txtBDate = DateEntry(self, font=("Poppins", 13), textvariable=BDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
+        self.txtBDate.place(x=890,y=420)
         
-        self.lblEmailAdd = Label(self, font=("Poppins", 12, "bold"), text="Due Date:", padx=5, pady=5)
-        self.lblEmailAdd.place(x=750,y=455)
-        self.txtEmailAdd = DateEntry(self, font=("Poppins", 13), textvariable=DDate, width=38, year=2021, month=7, day=7, bg="#375971", fg="snow")
-        self.txtEmailAdd.place(x=890,y=460)
+        self.lblDDate = Label(self, font=("Poppins", 12, "bold"), text="Due Date:", padx=5, pady=5)
+        self.lblDDate.place(x=750,y=455)
+        self.txtDDate = DateEntry(self, font=("Poppins", 13), textvariable=DDate, width=38, year=2021, month=7, day=7, bg="#375971", fg="snow")
+        self.txtDDate.place(x=890,y=460)
         
-        self.lblPhoneNum = Label(self, font=("Poppins", 12, "bold"), text="Return Date:", padx=5, pady=5)
-        self.lblPhoneNum.place(x=750,y=495)
-        self.txtPhoneNum = DateEntry(self, font=("Poppins", 13), textvariable=RDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
-        self.txtPhoneNum.place(x=890,y=500)
+        self.lblRDate = Label(self, font=("Poppins", 12, "bold"), text="Return Date:", padx=5, pady=5)
+        self.lblRDate.place(x=750,y=495)
+        self.txtRDate = DateEntry(self, font=("Poppins", 13), textvariable=RDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
+        self.txtRDate.place(x=890,y=500)
         
         
         self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search, width=50)
@@ -2023,28 +2025,31 @@ class Borrowers(tk.Frame):
 
         ##Functions
         def addBorrower():
-            conn = sqlite3.connect("BRS.db")
-            c = conn.cursor()
-            c2 = conn.cursor()
-            c2.execute("SELECT * FROM borrower")
-            borrowers = c2.fetchall()
-            list_of_valid_ids = []
-            for borrower in borrowers:
-                list_of_valid_ids.append(borrower[1])
-                
-            if ValidID.get() not in list_of_valid_ids:
-                try:      
-                    c.execute("INSERT INTO borrower(BorrowerIDNum, ValidID, Name, EmailAdd, PhoneNum) VALUES (?,?,?,?,?)",\
-                              (BorrowerIDNum.get(),ValidID.get(),Name.get(),EmailAdd.get(), PhoneNum.get()))
-                    conn.commit()           
-                    conn.close()
-                    clear()
-                    tkinter.messagebox.showinfo("Book Rental System", "Borrower has been recorded")
-                    displayBorrower()
-                except:
-                    tkinter.messagebox.showerror("Book Rental System", "Borrower already recorded")
+            if BorrowerIDNum.get() == "" or ValidID.get() == "" or Name.get() == "" or EmailAdd.get() == "" or PhoneNum.get() == "":
+                tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
             else:
-                tkinter.messagebox.showerror("Book Rental System", "Valid ID already recorded")
+                conn = sqlite3.connect("BRS.db")
+                c = conn.cursor()
+                c2 = conn.cursor()
+                c2.execute("SELECT * FROM borrower")
+                borrowers = c2.fetchall()
+                list_of_valid_ids = []
+                for borrower in borrowers:
+                    list_of_valid_ids.append(borrower[1])
+                    
+                if ValidID.get() not in list_of_valid_ids:
+                    try:      
+                        c.execute("INSERT INTO borrower(BorrowerIDNum, ValidID, Name, EmailAdd, PhoneNum) VALUES (?,?,?,?,?)",\
+                                  (BorrowerIDNum.get(),ValidID.get(),Name.get(),EmailAdd.get(), PhoneNum.get()))
+                        conn.commit()           
+                        conn.close()
+                        clear()
+                        tkinter.messagebox.showinfo("Book Rental System", "Borrower has been recorded")
+                        displayBorrower()
+                    except:
+                        tkinter.messagebox.showerror("Book Rental System", "Borrower already recorded")
+                else:
+                    tkinter.messagebox.showerror("Book Rental System", "Valid ID already recorded")
                 
         def displayBorrower():
             self.borrower.delete(*self.borrower.get_children())
