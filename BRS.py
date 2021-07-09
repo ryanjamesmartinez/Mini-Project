@@ -487,20 +487,20 @@ class Dashboard(tk.Frame):
         button3.place(x=15,y=330)
         button3.config(cursor= "hand2")
         
-        button4 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
+        button4 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Borrowers))
+        button4.place(x=21,y=380)
+        button4.config(cursor= "hand2")
+        
+        button5 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
                             width = 10,
                             bg="grey17",
                             fg="snow",
                             command=lambda: controller.show_frame(Order))
-        button4.place(x=10,y=380)
-        button4.config(cursor= "hand2")
-        
-        button5 = tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(History))
-        button5.place(x=17,y=430)
+        button5.place(x=10,y=430)
         button5.config(cursor= "hand2")
         
         button6 = tk.Button(self, text="⯀ REPORT",font=("Century Gothic",13,"bold"),bd=0,
@@ -511,13 +511,14 @@ class Dashboard(tk.Frame):
         button6.place(x=13,y=480)
         button6.config(cursor= "hand2")
         
-        button7 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
+        button7 =tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
                             bg="grey17",
                             fg="snow",
-                            command=lambda: controller.show_frame(Borrowers))
-        button7.place(x=21,y=530)
+                            command=lambda: controller.show_frame(History))
+        button7.place(x=17,y=530)
         button7.config(cursor= "hand2")
+        #90a3b0
 
         button8 = tk.Button(self, text="⯀ LOG-OUT",font=("Century Gothic",13,"bold"),bd=0,
                             width = 12,
@@ -679,11 +680,11 @@ class Books(tk.Frame):
                     self.booklist.insert("", tk.END, text=row[0], values=row[0:])
                 if row[1].startswith(search):
                     self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-                if row[2].startswith(search):
+                if row[2].count(search):
                     self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-                if row[3].startswith(search):
+                if row[3].count(search):
                     self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-                if row[4].startswith(search):
+                if row[4].count(search):
                     self.booklist.insert("", tk.END, text=row[0], values=row[0:])
                 if row[5].startswith(search):
                     self.booklist.insert("", tk.END, text=row[0], values=row[0:])
@@ -764,20 +765,20 @@ class Books(tk.Frame):
         button3.place(x=15,y=330)
         button3.config(cursor= "hand2")
         
-        button4 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
+        button4 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Borrowers))
+        button4.place(x=21,y=380)
+        button4.config(cursor= "hand2")
+        
+        button5 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
                             width = 10,
                             bg="grey17",
                             fg="snow",
                             command=lambda: controller.show_frame(Order))
-        button4.place(x=10,y=380)
-        button4.config(cursor= "hand2")
-        
-        button5 = tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(History))
-        button5.place(x=17,y=430)
+        button5.place(x=10,y=430)
         button5.config(cursor= "hand2")
         
         button6 = tk.Button(self, text="⯀ REPORT",font=("Century Gothic",13,"bold"),bd=0,
@@ -788,12 +789,12 @@ class Books(tk.Frame):
         button6.place(x=13,y=480)
         button6.config(cursor= "hand2")
         
-        button7 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
+        button7 =tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
                             bg="grey17",
                             fg="snow",
-                            command=lambda: controller.show_frame(Borrowers))
-        button7.place(x=21,y=530)
+                            command=lambda: controller.show_frame(History))
+        button7.place(x=17,y=530)
         button7.config(cursor= "hand2")
 
         button8 = tk.Button(self, text="⯀ LOG-OUT",font=("Century Gothic",13,"bold"),bd=0,
@@ -1055,20 +1056,20 @@ class Genres(tk.Frame):
         button3.place(x=15,y=330)
         button3.config(cursor= "hand2")
         
-        button4 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
+        button4 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Borrowers))
+        button4.place(x=21,y=380)
+        button4.config(cursor= "hand2")
+        
+        button5 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
                             width = 10,
                             bg="grey17",
                             fg="snow",
                             command=lambda: controller.show_frame(Order))
-        button4.place(x=10,y=380)
-        button4.config(cursor= "hand2")
-        
-        button5 = tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(History))
-        button5.place(x=17,y=430)
+        button5.place(x=10,y=430)
         button5.config(cursor= "hand2")
         
         button6 = tk.Button(self, text="⯀ REPORT",font=("Century Gothic",13,"bold"),bd=0,
@@ -1079,12 +1080,12 @@ class Genres(tk.Frame):
         button6.place(x=13,y=480)
         button6.config(cursor= "hand2")
         
-        button7 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
+        button7 =tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
                             bg="grey17",
                             fg="snow",
-                            command=lambda: controller.show_frame(Borrowers))
-        button7.place(x=21,y=530)
+                            command=lambda: controller.show_frame(History))
+        button7.place(x=17,y=530)
         button7.config(cursor= "hand2")
 
         button8 = tk.Button(self, text="⯀ LOG-OUT",font=("Century Gothic",13,"bold"),bd=0,
@@ -1165,7 +1166,333 @@ class Genres(tk.Frame):
         
         displayGenre()
         displayBooks()
+
+class Borrowers(tk.Frame):
+
+     def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        self.controller.title("Book Rental System")
         
+        uppercolor = tk.Label(self,height = 3,width = 1500, bg="#375971")
+        uppercolor.place(x=0,y=0)
+        loweruppercolor = tk.Label(self,height = 3,width = 1500, bg="#90a3b0")
+        loweruppercolor.place(x=0,y=50)
+        leftcolor = tk.Label(self,height = 600,width = 25, bg="grey17")
+        leftcolor.place(x=0,y=0)
+        
+        
+        label = tk.Label(self, text="Borrower", bg="#90a3b0", font=("Century Gothic", 20))
+        label.place(x=200,y=55)
+        
+        applogo = tk.Label(self, text="🕮", font=("Impact",70),bd=0,
+                            bg="grey17",
+                            fg="snow",)
+        applogo.place(x=40,y=5)
+        apptitle = tk.Label(self, text="BOOK RENTAL\nSYSTEM", font=("Impact",19),bd=0,
+                            bg="grey17",
+                            fg="snow",)
+        apptitle.place(x=25,y=130)
+        
+        BorrowerIDNum = StringVar()
+        ValidID = StringVar()
+        Name = StringVar()
+        EmailAdd = StringVar()
+        PhoneNum = StringVar()
+        Search = StringVar()
+        SearchBy = StringVar()
+        SearchAvail = StringVar()
+        Showby = StringVar()
+        Status = StringVar()
+
+        ##Functions
+        def addBorrower():
+            if BorrowerIDNum.get() == "" or ValidID.get() == "" or Name.get() == "" or EmailAdd.get() == "" or PhoneNum.get() == "":
+                tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
+            else:
+                conn = sqlite3.connect("BRS.db")
+                c = conn.cursor()
+                c2 = conn.cursor()
+                c2.execute("SELECT * FROM borrower")
+                borrowers = c2.fetchall()
+                list_of_valid_ids = []
+                for borrower in borrowers:
+                    list_of_valid_ids.append(borrower[1])
+                    
+                if ValidID.get() not in list_of_valid_ids:
+                    try:      
+                        c.execute("INSERT INTO borrower(BorrowerIDNum, ValidID, Name, EmailAdd, PhoneNum) VALUES (?,?,?,?,?)",\
+                                  (BorrowerIDNum.get(),ValidID.get(),Name.get(),EmailAdd.get(), PhoneNum.get()))
+                        conn.commit()           
+                        conn.close()
+                        clear()
+                        tkinter.messagebox.showinfo("Book Rental System", "Borrower has been recorded")
+                        displayBorrower()
+                    except:
+                        tkinter.messagebox.showerror("Book Rental System", "Borrower already recorded")
+                else:
+                    tkinter.messagebox.showerror("Book Rental System", "Valid ID already recorded")
+                
+        def displayBorrower():
+            self.borrower.delete(*self.borrower.get_children())
+            conn = sqlite3.connect("BRS.db")
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM borrower")
+            rows = cur.fetchall()
+            for row in rows:
+                self.borrower.insert("", tk.END, text=row[0], values=row[0:])
+            conn.close()
+            
+        def showAll():
+            displayBorrower()
+
+        def clear():
+            BorrowerIDNum.set('')
+            ValidID.set('')
+            Name.set('')
+            EmailAdd.set('')
+            PhoneNum.set('')
+            
+        def updateBorrower():
+            if BorrowerIDNum.get() == "" or ValidID.get() == "" or Name.get() == "" or EmailAdd.get() == "" or PhoneNum.get() == "":
+                tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
+            else:
+                for selected in self.borrower.selection():
+                    conn = sqlite3.connect("BRS.db")
+                    cur = conn.cursor()
+                    #cur.execute("PRAGMA foreign_keys = ON")
+                    cur.execute("UPDATE borrower SET BorrowerIDNum = ?,ValidID = ?, Name = ?, EmailAdd = ? ,PhoneNum = ? WHERE BorrowerIDNum=?", \
+                                (BorrowerIDNum.get(),ValidID.get(),Name.get(),EmailAdd.get(),PhoneNum.get(), self.borrower.set(selected, '#1')))   
+                    conn.commit()
+                    tkinter.messagebox.showinfo("Books Rental System", "Book Updated Successfully")
+                    displayBorrower()
+                    clear()
+                    conn.close()
+                    
+        def OnDoubleClick(event):
+            item = self.borrower.selection()[0]
+            values = self.borrower.item(item, "values")  
+            BorrowerIDNum.set(values[0])
+            ValidID.set(values[1])
+            Name.set(values[2])
+            EmailAdd.set(values[3])
+            PhoneNum.set(values[4])
+
+        def deleteBorrower():   
+            messageDelete = tkinter.messagebox.askyesno("Book Rental System", "Do you want to remove this book?")
+            if messageDelete > 0:   
+                con = sqlite3.connect("BRS.db")
+                cur = con.cursor()
+                x = self.borrower.selection()[0]
+                id_no = self.borrower.item(x)["values"][0]
+                #cur.execute("PRAGMA foreign_keys = ON")
+                cur.execute("DELETE FROM borrower WHERE BorrowerIDNum = ?",(id_no,))                    
+                con.commit()
+                self.borrower.delete(x)
+                tkinter.messagebox.showinfo("Book Rental System", "Borrower has been deleted")
+                displayBorrower()
+                clear()
+                con.close()
+                
+        def searchBorrower():
+            search = Search.get() 
+            searchby = SearchBy.get()              
+            con = sqlite3.connect("BRS.db")
+            cur = con.cursor()
+            cur.execute("SELECT * FROM borrower")
+            con.commit()
+            self.borrower.delete(*self.borrower.get_children())
+            rows = cur.fetchall()
+            for row in rows:
+                if searchby == "Borrower's ID":
+                    if row[0].count(search):
+                        self.borrower.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == "Valid ID":
+                    if row[1].count(search):
+                        self.borrower.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Name':
+                    if row[2].startswith(search):
+                        self.borrower.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == "Email Add":
+                    if row[3].count(search):
+                        self.borrower.insert("", tk.END, text=row[0], values=row[0:])
+                else:
+                    if row[4].count(search):
+                        self.borrower.insert("", tk.END, text=row[0], values=row[0:])
+            con.close()
+
+        def logout():
+            iExit = tkinter.messagebox.askyesno("Book Rental Sysytem","Do you want to log-out?")
+            if iExit > 0:
+                controller.show_frame(Login)
+
+        ## Window Buttons
+        
+        button1 = tk.Button(self, text="⯀ DASHBOARD",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Dashboard))
+        button1.place(x=25,y=230)
+        button1.config(cursor= "hand2")
+
+        button2 = tk.Button(self, text="⯀ BOOKS",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Books))
+        button2.place(x=12,y=280)
+        button2.config(cursor= "hand2")
+        
+        button3 = tk.Button(self, text="⯀ GENRES",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Genres))
+        button3.place(x=15,y=330)
+        button3.config(cursor= "hand2")
+        
+        button4 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="#90a3b0",
+                            command=lambda: controller.show_frame(Borrowers))
+        button4.place(x=21,y=380)
+        button4.config(cursor= "hand2")
+        
+        button5 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Order))
+        button5.place(x=10,y=430)
+        button5.config(cursor= "hand2")
+        
+        button6 = tk.Button(self, text="⯀ REPORT",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Report))
+        button6.place(x=13,y=480)
+        button6.config(cursor= "hand2")
+        
+        button7 =tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(History))
+        button7.place(x=17,y=530)
+        button7.config(cursor= "hand2")
+
+        button8 = tk.Button(self, text="⯀ LOG-OUT",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="snow",
+                            command=logout)
+        button8.place(x=11,y=580)
+        button8.config(cursor= "hand2")
+         
+        booklist = tk.Label(self,height = 2,width = 108, bg="#89E894")
+        
+        self.borrower = ttk.Treeview(self,
+                                        columns=("Borrower's ID","Valid ID", "Name", "Email Add", "Phone Number"),
+                                        height = 13)
+
+        self.borrower.heading("Borrower's ID", text="Borrower's ID", anchor=W)
+        self.borrower.heading("Valid ID", text="Valid ID",anchor=W)
+        self.borrower.heading("Name", text="Name",anchor=W)
+        self.borrower.heading("Email Add", text="Email Add",anchor=W)
+        self.borrower.heading("Phone Number", text="Phone Number",anchor=W)
+        self.borrower['show'] = 'headings'
+
+        self.borrower.column("Borrower's ID", width=200, anchor=W, stretch=False)
+        self.borrower.column("Valid ID", width=150, stretch=False)
+        self.borrower.column("Name", width=380, stretch=False)
+        self.borrower.column("Email Add", width=200, anchor=W, stretch=False)
+        self.borrower.column("Phone Number", width=180, anchor=W, stretch=False)
+        
+        
+        self.borrower.bind("<Double-1>",OnDoubleClick)
+        
+        self.borrower.place(x=200,y=180)
+        
+        lblborrower = tk.Label(self, font = ("Century Gothic",15), padx = 3 ,width =92, height = 1,text="List of Borrowers",anchor=W, bg="#375971", fg="snow")
+        lblborrower.place(x=200,y=151)
+        
+        self.lblsearchby = Label(self, font=("Poppins", 12),anchor = W, text="SEARCH BY:", width = 72, padx=5, pady=5,bg="#90a3b0")
+        self.lblsearchby.place(x=650,y=116)
+        
+        self.lblBBID = Label(self, font=("Poppins", 12, "bold"), text="Borrower ID Num:", padx=5, pady=5)
+        self.lblBBID.place(x=200,y=475)
+        self.txtBBID = Entry(self, font=("Poppins", 13), textvariable=BorrowerIDNum, width=38)
+        self.txtBBID.place(x=360,y=480)
+        
+        self.lblName = Label(self, font=("Poppins", 12, "bold"), text="Name:", padx=5, pady=5)
+        self.lblName.place(x=200,y=515)
+        self.txtName = Entry(self, font=("Poppins", 13), textvariable=Name, width=38)
+        self.txtName.place(x=360,y=520)
+        
+        self.lblVID = Label(self, font=("Poppins", 12, "bold"), text="Valid ID", padx=5, pady=5)
+        self.lblVID.place(x=200,y=555)
+        self.txtVID = Entry(self, font=("Poppins", 13), textvariable=ValidID, width=38)
+        self.txtVID.place(x=360,y=560)
+        
+        self.lblEMA = Label(self, font=("Poppins", 12, "bold"), text="Email Add", padx=5, pady=5)
+        self.lblEMA.place(x=200,y=595)
+        self.txtEMA = Entry(self, font=("Poppins", 13), textvariable=EmailAdd, width=38)
+        self.txtEMA.place(x=360,y=600)
+        
+        self.lblPN = Label(self, font=("Poppins", 12, "bold"), text="Phone Number", padx=5, pady=5)
+        self.lblPN.place(x=750,y=475)
+        self.txtPN= Entry(self, font=("Poppins", 13), textvariable=PhoneNum, width=38)
+        self.txtPN.place(x=890,y=480)
+        
+        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search,relief=FLAT, width=40)
+        self.txtSearch.place(x=900,y=120)
+        
+        #### Buttons 
+        
+        self.btnAddBook = Button(self, text="➕  ADD", font=('Poppins', 11), height=1, width=10, bd=1, 
+                               bg="#90a3b0", command=addBorrower)
+        self.btnAddBook.place(x=330,y=650)
+        self.btnAddBook.config(cursor= "hand2")
+        
+        self.btnUpdateBook = Button(self, text="⟲  UPDATE", font=('Poppins', 11), height=1, width=10, bd=1, 
+                               bg="#90a3b0",command=updateBorrower)
+        self.btnUpdateBook.place(x=455,y=650)
+        self.btnUpdateBook.config(cursor= "hand2")
+        
+        
+        self.btnDeleteBook = Button(self, text="➖  DELETE", font=('Poppins', 11), height=1, width=10, bd=1, 
+                               bg="#90a3b0", command=deleteBorrower)
+        self.btnDeleteBook.place(x=585,y=650)
+        self.btnDeleteBook.config(cursor= "hand2")
+        
+        self.btnCLear = Button(self, text="CLEAR", font=('Poppins', 11), height=1, width=10, bd=1, 
+                               bg="#90a3b0", command=clear)
+        self.btnCLear.place(x=205,y=650)
+        self.btnCLear.config(cursor= "hand2")
+        
+        
+        self.btnShowallOrder = Button(self, text="SHOW ALL", font=('Poppins', 11), height=1, width=10, bd=1, 
+                               bg="#90a3b0", command = showAll)
+        self.btnShowallOrder.place(x=200,y=118)
+        self.btnShowallOrder.config(cursor= "hand2")
+        
+        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 13),  bd=0, bg="#90a3b0",
+                               command=searchBorrower)
+        self.btnSearchBook.place(x=1270,y=116)
+        self.btnSearchBook.config(cursor= "hand2")
+
+        self.btnSearchBy = ttk.Combobox(self, 
+                                        state = "readonly", 
+                                        font=('Century Gothic', 10), width=14, textvariable = SearchBy)
+        self.btnSearchBy['values'] = ("Borrower's ID","Valid ID", "Name", "Email Add", "Phone Number")
+        self.btnSearchBy.place(x=778,y=120)
+        
+
+        displayBorrower()
+                
 class Order(tk.Frame):
 
      def __init__(self, parent, controller):
@@ -1199,6 +1526,7 @@ class Order(tk.Frame):
         DueDate = StringVar()
         ReturnDate = StringVar()
         Search = StringVar()
+        SearchBy = StringVar()
                     
        
         def addOrder():
@@ -1301,15 +1629,29 @@ class Order(tk.Frame):
                 con.close()
                         
         def searchOrder():
-            search = Search.get()                
+            search = Search.get() 
+            searchby = SearchBy.get()          
             con = sqlite3.connect("BRS.db")
             cur = con.cursor()
-            cur.execute("SELECT * FROM rent WHERE RentOrderNo = ?",(search,))
+            cur.execute("SELECT * FROM rent")
             con.commit()
             self.orderlist.delete(*self.orderlist.get_children())
             rows = cur.fetchall()
             for row in rows:
-                    if row[0].startswith(search):
+                if searchby == 'Rent Order':
+                    if str(row[0]).count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Book ID':
+                    if row[1].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == "Borrower's ID":
+                    if row[2].startswith(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Date Borrowed':
+                    if row[3].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                else:
+                    if row[4].count(search):
                         self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
             con.close()
  
@@ -1380,20 +1722,20 @@ class Order(tk.Frame):
         button3.place(x=15,y=330)
         button3.config(cursor= "hand2")
         
-        button4 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
+        button4 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Borrowers))
+        button4.place(x=21,y=380)
+        button4.config(cursor= "hand2")
+        
+        button5 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
                             width = 10,
                             bg="grey17",
                             fg="#90a3b0",
                             command=lambda: controller.show_frame(Order))
-        button4.place(x=10,y=380)
-        button4.config(cursor= "hand2")
-        
-        button5 = tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(History))
-        button5.place(x=17,y=430)
+        button5.place(x=10,y=430)
         button5.config(cursor= "hand2")
         
         button6 = tk.Button(self, text="⯀ REPORT",font=("Century Gothic",13,"bold"),bd=0,
@@ -1404,12 +1746,12 @@ class Order(tk.Frame):
         button6.place(x=13,y=480)
         button6.config(cursor= "hand2")
         
-        button7 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
+        button7 =tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
                             bg="grey17",
                             fg="snow",
-                            command=lambda: controller.show_frame(Borrowers))
-        button7.place(x=21,y=530)
+                            command=lambda: controller.show_frame(History))
+        button7.place(x=17,y=530)
         button7.config(cursor= "hand2")
 
         button8 = tk.Button(self, text="⯀ LOG-OUT",font=("Century Gothic",13,"bold"),bd=0,
@@ -1466,10 +1808,12 @@ class Order(tk.Frame):
         self.lblDueDate.place(x=200,y=270)
         self.txtDueDate = DateEntry(self, font=("Poppins", 13), textvariable=DueDate, width=23, year=2021, month=7, day=7, bg="blue", fg="snow")
         self.txtDueDate.place(x=330,y=275)
+             
+        self.lblsearchby = Label(self, font=("Poppins", 12),anchor = W, text="SEARCH BY:", width = 58, padx=5, pady=5,bg="#90a3b0")
+        self.lblsearchby.place(x=760,y=116)
         
-        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search, width=50)
-        self.txtSearch.place(x=800,y=120)
-        
+        self.txtSearch = Entry(self, font=("Poppins", 13),  textvariable=Search,relief=FLAT, width=30)
+        self.txtSearch.place(x=998,y=120)
         
         self.btnAddOrder = Button(self, text="➕  ADD ORDER", font=('Poppins', 11), height=1, width=17, bd=1, 
                                bg="#90a3b0", command = addOrder)
@@ -1486,15 +1830,22 @@ class Order(tk.Frame):
         self.btnUpdateOrder.place(x=215,y=500)
         self.btnUpdateOrder.config(cursor= "hand2")
         
-        self.btnRemoveOrder = Button(self, text="➖  REMOVE ORDER", font=('Poppins', 11), height=1, width=17, bd=1, 
-                               bg="#90a3b0", command = deleteOrder)
-        self.btnRemoveOrder.place(x=380,y=500)
-        self.btnRemoveOrder.config(cursor= "hand2")
+        #self.btnRemoveOrder = Button(self, text="➖  REMOVE ORDER", font=('Poppins', 11), height=1, width=17, bd=1, 
+                               #bg="#90a3b0", command = deleteOrder)
+        #self.btnRemoveOrder.place(x=380,y=500)
+        #self.btnRemoveOrder.config(cursor= "hand2")
         
-        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 17),  bd=0, 
+        self.btnSearchBy = ttk.Combobox(self, 
+                                        state = "readonly", 
+                                        font=('Century Gothic', 10), width=14, textvariable = SearchBy)
+        self.btnSearchBy['values'] = ('Rent Order','Book ID',"Borrower's ID", 'Date Borrowed','Due Date')
+        self.btnSearchBy.place(x=876,y=120)
+        
+        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 13),  bd=0, bg="#90a3b0",
                                command=searchOrder)
-        self.btnSearchBook.place(x=1250,y=109)
+        self.btnSearchBook.place(x=1250,y=116)
         self.btnSearchBook.config(cursor= "hand2")
+        
         
         self.btnShowallBook = Button(self, text="SHOW ALL", font=('Poppins', 11), height=1, width=10, bd=1, 
                                bg="#90a3b0",command=showAll)
@@ -1503,160 +1854,6 @@ class Order(tk.Frame):
                    
         displayOrder()
        
-class History(tk.Frame):
-
-     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-        self.controller.title("Book Rental System")
-        
-        uppercolor = tk.Label(self,height = 3,width = 1500, bg="#375971")
-        uppercolor.place(x=0,y=0)
-        loweruppercolor = tk.Label(self,height = 3,width = 1500, bg="#90a3b0")
-        loweruppercolor.place(x=0,y=50)
-        leftcolor = tk.Label(self,height = 600,width = 25, bg="grey17")
-        leftcolor.place(x=0,y=0)
-        
-        
-        label = tk.Label(self, text="History", bg="#90a3b0", font=("Century Gothic", 20))
-        label.place(x=200,y=55)
-        
-        applogo = tk.Label(self, text="🕮", font=("Impact",70),bd=0,
-                            bg="grey17",
-                            fg="snow",)
-        applogo.place(x=40,y=5)
-        apptitle = tk.Label(self, text="BOOK RENTAL\nSYSTEM", font=("Impact",19),bd=0,
-                            bg="grey17",
-                            fg="snow",)
-        apptitle.place(x=25,y=130)
-        
-        Search = StringVar() 
-
-        def displayHistory():
-            self.orderlist.delete(*self.orderlist.get_children())
-            conn = sqlite3.connect("BRS.db")
-            cur = conn.cursor()
-            cur.execute("PRAGMA foreign_keys = ON")
-            cur.execute("SELECT * FROM history")
-            rows = cur.fetchall()
-            for row in rows:
-                self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
-            conn.close()   
-            
-        def Refresh():
-            displayHistory()
-
-        def logout():
-            iExit = tkinter.messagebox.askyesno("Book Rental Sysytem","Do you want to log-out?")
-            if iExit > 0:
-                controller.show_frame(Login)
-            
-        ## Window Buttons
-        
-        button1 = tk.Button(self, text="⯀ DASHBOARD",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(Dashboard))
-        button1.place(x=25,y=230)
-        button1.config(cursor= "hand2")
-
-        button2 = tk.Button(self, text="⯀ BOOKS",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(Books))
-        button2.place(x=12,y=280)
-        button2.config(cursor= "hand2")
-        
-        button3 = tk.Button(self, text="⯀ GENRES",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(Genres))
-        button3.place(x=15,y=330)
-        button3.config(cursor= "hand2")
-        
-        button4 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(Order))
-        button4.place(x=10,y=380)
-        button4.config(cursor= "hand2")
-        
-        button5 = tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="#90a3b0",
-                            command=lambda: controller.show_frame(History))
-        button5.place(x=17,y=430)
-        button5.config(cursor= "hand2")
-        
-        button6 = tk.Button(self, text="⯀ REPORT",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(Report))
-        button6.place(x=13,y=480)
-        button6.config(cursor= "hand2")
-        
-        button7 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(Borrowers))
-        button7.place(x=21,y=530)
-        button7.config(cursor= "hand2")
-
-        button8 = tk.Button(self, text="⯀ LOG-OUT",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
-                            bg="grey17",
-                            fg="snow",
-                            command=logout)
-        button8.place(x=11,y=580)
-        button8.config(cursor= "hand2")
-        
-        
-        
-        self.orderlist = ttk.Treeview(self,
-                                        columns=("Rent Order ID","Book ID","Borrower's ID","Date Borrowed","Due Date"),
-                                        height = 22)
-        
-        self.orderlist.heading("Rent Order ID", text="Rent Order ID",anchor=W)
-        self.orderlist.heading("Book ID", text="Book ID",anchor=W) 
-        self.orderlist.heading("Borrower's ID", text="Borrower's ID", anchor=W)
-        self.orderlist.heading("Date Borrowed", text="Date Borrowed", anchor=W)
-        self.orderlist.heading("Due Date", text="Due Date", anchor=W)
-        self.orderlist['show'] = 'headings'
-
-        self.orderlist.column("Rent Order ID", width=150, anchor=W, stretch=False)
-        self.orderlist.column("Book ID", width=300, anchor=W, stretch=False)
-        self.orderlist.column("Borrower's ID", width=220, stretch=False)
-        self.orderlist.column("Date Borrowed", width=220, stretch=False)
-        self.orderlist.column("Due Date", width=220, stretch=False)
-        
-        self.orderlist.place(x=200,y=180)
-        
-        lblorderlist = tk.Label(self, font = ("Century Gothic",15), padx=3,width = 92, height = 1,text="List of All Transaction", anchor=W, bg="#375971", fg="snow")
-        lblorderlist.place(x=200,y=151)
-        
-        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search, width=50)
-        self.txtSearch.place(x=800,y=120)
-        
-        
-        #### Buttons
-        
-        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 17),  bd=0)
-        self.btnSearchBook.place(x=1270,y=109)
-        self.btnSearchBook.config(cursor= "hand2")
-        
-        self.btnShowallBook = Button(self, text="SHOW ALL", font=('Poppins', 11), height=1, width=10, bd=1, 
-                               bg="#90a3b0",command=Refresh)
-        self.btnShowallBook.place(x=200,y=118)
-        self.btnShowallBook.config(cursor= "hand2")
-        
-        displayHistory() 
         
 class Report(tk.Frame):
 
@@ -1694,6 +1891,7 @@ class Report(tk.Frame):
         BDate = StringVar()
         DDate = StringVar()
         RDate = StringVar()
+        SearchBy = StringVar()
         
         con = sqlite3.connect("BRS.db")
         cur = con.cursor()
@@ -1701,39 +1899,54 @@ class Report(tk.Frame):
         books = cur.fetchall()
         bookid = []
         for book in books:
-             bookid.append(book[0])
+            if str(book[5]) == 'Unavailable':
+                bookid.append(book[0])
 
-        cur.execute("SELECT * FROM borrower")
+        cur.execute("SELECT * FROM rent")
         borrower=cur.fetchall()
         bIDNum =[]
         for b in borrower:
-            bIDNum.append(b[0])
-
-        cur.execute("SELECT * FROM borrower")
-        bor=cur.fetchall()
-        
-        bname =[]
-        """
-        for b in bor:
-            bname.append(b[2])
-        """
+            bIDNum.append(b[2])
         
         def addReport():
-            if BIDNum.get() == "" or BNumber.get() == "" or BDate.get() == "" or DDate.get() == "" or RDate.get() == "":
+            if BIDNum.get() == "" or BNumber.get() == "" or RDate.get() == "":
                     tkinter.messagebox.showerror("Book Rental System", "Please fill in the box")
             else: 
                 conn = sqlite3.connect("BRS.db")
                 cur = conn.cursor()
+                cur2 = conn.cursor()
+                cur3 = conn.cursor()
                 cur.execute("SELECT * FROM borrower")
+                cur2.execute("SELECT * FROM books")
+                cur3.execute("SELECT * FROM rent")
                 borname = cur.fetchall()
+                books = cur2.fetchall()
+                rents = cur3.fetchall()
                 Name = ""
                 for borrower in borname:
                     if BIDNum.get() == borrower[0]:
                         Name = borrower[2]
                         try:
                             cur.execute("PRAGMA foreign_keys = ON")
-                            cur.execute("INSERT INTO report (BIDNum, Name, BookNumber, DateBorrowed, DueDate, ReturnDate) VALUES (?,?,?,?,?,?)",\
-                                          (BIDNum.get(), Name,BNumber.get(), BDate.get(), DDate.get(),RDate.get()))      
+                            for rent in rents:
+                                if str(BNumber.get()) == str(rent[1]):
+                                    cur.execute("DELETE FROM rent WHERE RentOrderNo = ?",(rent[0],))   
+                                    cur.execute("INSERT INTO report (BIDNum, Name, BookNumber, DateBorrowed, DueDate, ReturnDate) VALUES (?,?,?,?,?,?)",\
+                                          (BIDNum.get(), Name,BNumber.get(), rent[3], rent[4],RDate.get()))  
+                                else:
+                                    pass
+                                
+                            for book in books:
+                                if str(BNumber.get()) == str(book[0]):
+                                    cur2.execute("UPDATE books SET BookNumber = ?, ISBN = ?, Title = ?, Author = ?, Genre = ?, Status = 'Available' WHERE BookNumber = ?",
+                                                 (BNumber.get(),book[1],book[2],book[3],book[4],BNumber.get()))  
+                                    cur2.execute("INSERT INTO booksavailable (BookNumber, ISBN, Title, Author, Genre) VALUES (?,?,?,?,?)",\
+                                                 (BNumber.get(),book[1],book[2],book[3],book[4]))
+                                    cur2.execute("INSERT INTO return (BookNumber, ISBN, Title, Author, Genre) VALUES (?,?,?,?,?)",\
+                                                 (BNumber.get(),book[1],book[2],book[3],book[4]))
+                                else:
+                                    pass
+                            
                             conn.commit()           
                             conn.close()
                             clear()
@@ -1746,7 +1959,6 @@ class Report(tk.Frame):
             self.orderlist.delete(*self.orderlist.get_children())
             conn = sqlite3.connect("BRS.db")
             cur = conn.cursor()
-            #cur.execute("PRAGMA foreign_keys = ON")
             cur.execute("SELECT * FROM report")
             rows = cur.fetchall()
             for row in rows:
@@ -1760,7 +1972,6 @@ class Report(tk.Frame):
                 for selected in self.orderlist.selection():
                     conn = sqlite3.connect("BRS.db")
                     cur = conn.cursor()
-                    #cur.execute("PRAGMA foreign_keys = ON")
                     cur.execute("UPDATE report SET BIDNum = ?, Name = ?, BookNumber = ?,DateBorrowed = ?, DueDate = ?, ReturnDate = ? WHERE ReportOrderNo = ?", \
                                 (BIDNum.get(), Name.get(),BNumber.get(), BDate.get(), DDate.get(),RDate.get(), self.orderlist.set(selected, '#1')))   
                     conn.commit()
@@ -1776,8 +1987,7 @@ class Report(tk.Frame):
                 cur = con.cursor()
                 x = self.orderlist.selection()[0]
                 id_no = self.orderlist.item(x)["values"][0]
-                #cur.execute("PRAGMA foreign_keys = ON")
-                cur.execute("DELETE FROM report WHERE ReportOrderNo = ?",(id_no,))                   
+                cur.execute("DELETE FROM report WHERE ReportOrderNo = ?",(id_no,)) 
                 con.commit()
                 self.orderlist.delete(x)
                 tkinter.messagebox.showinfo("Book Rental System", "Transaction deleted from database")
@@ -1785,16 +1995,36 @@ class Report(tk.Frame):
                 con.close()   
                         
         def searchReport():
-            search = Search.get()                
+            search = Search.get()  
+            searchby = SearchBy.get()              
             con = sqlite3.connect("BRS.db")
             cur = con.cursor()
-            cur.execute("SELECT * FROM report WHERE ReportOrderNo = ?",(search,))
+            cur.execute("SELECT * FROM report")
             con.commit()
             self.orderlist.delete(*self.orderlist.get_children())
             rows = cur.fetchall()
             for row in rows:
-                if row[0].startswith(search):
-                    self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                if searchby == 'Rent Order':
+                    if str(row[0]).count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == "Borrower's ID":
+                    if row[1].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Name':
+                    if row[2].startswith(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Book Number':
+                    if row[3].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Borrowed Date':
+                    if row[4].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Due Date':
+                    if row[5].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                else:
+                    if row[6].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
             con.close()
  
         def showAll():
@@ -1849,20 +2079,20 @@ class Report(tk.Frame):
         button3.place(x=15,y=330)
         button3.config(cursor= "hand2")
         
-        button4 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
+        button4 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Borrowers))
+        button4.place(x=21,y=380)
+        button4.config(cursor= "hand2")
+        
+        button5 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
                             width = 10,
                             bg="grey17",
                             fg="snow",
                             command=lambda: controller.show_frame(Order))
-        button4.place(x=10,y=380)
-        button4.config(cursor= "hand2")
-        
-        button5 = tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(History))
-        button5.place(x=17,y=430)
+        button5.place(x=10,y=430)
         button5.config(cursor= "hand2")
         
         button6 = tk.Button(self, text="⯀ REPORT",font=("Century Gothic",13,"bold"),bd=0,
@@ -1873,12 +2103,12 @@ class Report(tk.Frame):
         button6.place(x=13,y=480)
         button6.config(cursor= "hand2")
         
-        button7 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
+        button7 =tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
                             bg="grey17",
                             fg="snow",
-                            command=lambda: controller.show_frame(Borrowers))
-        button7.place(x=21,y=530)
+                            command=lambda: controller.show_frame(History))
+        button7.place(x=17,y=530)
         button7.config(cursor= "hand2")
 
         button8 = tk.Button(self, text="⯀ LOG-OUT",font=("Century Gothic",13,"bold"),bd=0,
@@ -1891,7 +2121,7 @@ class Report(tk.Frame):
         
         self.orderlist = ttk.Treeview(self,
                                         columns=("Rent Order No.","Borrower's ID","Name","Book Number","Borrow Date", "Due Date","Return Date"),
-                                        height = 10)
+                                        height = 13)
         
         self.orderlist.heading("Rent Order No.", text="Rent Order No.",anchor=W)
         self.orderlist.heading("Borrower's ID", text="Borrower's ID",anchor=W)
@@ -1918,39 +2148,42 @@ class Report(tk.Frame):
         lblorderlist = tk.Label(self, font = ("Century Gothic",15), padx=3,width = 92, height = 1,text="Report List", anchor=W, bg="#375971", fg="snow")
         lblorderlist.place(x=200,y=151)
         
+        self.lblsearchby = Label(self, font=("Poppins", 12),anchor = W, text="SEARCH BY:", width = 72, padx=5, pady=5,bg="#90a3b0")
+        self.lblsearchby.place(x=650,y=116)
+        
+        
         self.lblBorrowerID = Label(self, font=("Poppins", 12, "bold"), text="Borrower's ID Num:", padx=5, pady=5)
-        self.lblBorrowerID.place(x=200,y=415)
+        self.lblBorrowerID.place(x=200,y=475)
         self.txtBorrowerID = ttk.Combobox(self,
                                         values = bIDNum,
                                         state="readonly", font=("Poppins", 13), textvariable=BIDNum, width=38)
-        self.txtBorrowerID.place(x=360,y=420)
+        self.txtBorrowerID.place(x=360,y=480)
         
         self.lblBookNum = Label(self, font=("Poppins", 12, "bold"), text="Book Number:", padx=5, pady=5)
-        self.lblBookNum.place(x=200,y=455)
+        self.lblBookNum.place(x=200,y=515)
         
         self.txtBookNum =ttk.Combobox(self,
                                         values = bookid,
                                         state="readonly", font=("Poppins", 13), textvariable=BNumber, width=38)
-        self.txtBookNum.place(x=360,y=460)
+        self.txtBookNum.place(x=360,y=520)
         
-        self.lblBDate = Label(self, font=("Poppins", 12, "bold"), text="Borrow Date:", padx=5, pady=5)
-        self.lblBDate.place(x=750,y=415)
-        self.txtBDate = DateEntry(self, font=("Poppins", 13), textvariable=BDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
-        self.txtBDate.place(x=890,y=420)
+        #self.lblBDate = Label(self, font=("Poppins", 12, "bold"), text="Borrow Date:", padx=5, pady=5)
+        #self.lblBDate.place(x=750,y=415)
+        #self.txtBDate = DateEntry(self, font=("Poppins", 13), textvariable=BDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
+        #self.txtBDate.place(x=890,y=420)
         
-        self.lblDDate = Label(self, font=("Poppins", 12, "bold"), text="Due Date:", padx=5, pady=5)
-        self.lblDDate.place(x=750,y=455)
-        self.txtDDate = DateEntry(self, font=("Poppins", 13), textvariable=DDate, width=38, year=2021, month=7, day=7, bg="#375971", fg="snow")
-        self.txtDDate.place(x=890,y=460)
+        #self.lblDDate = Label(self, font=("Poppins", 12, "bold"), text="Due Date:", padx=5, pady=5)
+        #self.lblDDate.place(x=750,y=455)
+        #self.txtDDate = DateEntry(self, font=("Poppins", 13), textvariable=DDate, width=38, year=2021, month=7, day=7, bg="#375971", fg="snow")
+        #self.txtDDate.place(x=890,y=460)
         
         self.lblRDate = Label(self, font=("Poppins", 12, "bold"), text="Return Date:", padx=5, pady=5)
-        self.lblRDate.place(x=750,y=495)
-        self.txtRDate = DateEntry(self, font=("Poppins", 13), textvariable=RDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
-        self.txtRDate.place(x=890,y=500)
+        self.lblRDate.place(x=750,y=475)
+        self.txtRDate = DateEntry(self, font=("Poppins", 13), state="readonly", textvariable=RDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
+        self.txtRDate.place(x=890,y=480)
         
-        
-        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search, width=50)
-        self.txtSearch.place(x=800,y=120)
+        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search,relief=FLAT, width=40)
+        self.txtSearch.place(x=900,y=120)
         
         #### Buttons 
         
@@ -1974,9 +2207,9 @@ class Report(tk.Frame):
         self.btnclear.place(x=205,y=650)
         self.btnclear.config(cursor= "hand2")
 
-        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 17),  bd=0, 
+        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 13),  bd=0, bg="#90a3b0",
                                command=searchReport)
-        self.btnSearchBook.place(x=1270,y=109)
+        self.btnSearchBook.place(x=1270,y=116)
         self.btnSearchBook.config(cursor= "hand2")
         
         self.btnShowallOrder = Button(self, text="SHOW ALL", font=('Poppins', 11), height=1, width=10, bd=1, 
@@ -1984,9 +2217,17 @@ class Report(tk.Frame):
         self.btnShowallOrder.place(x=200,y=118)
         self.btnShowallOrder.config(cursor= "hand2")
         
-        displayReport()
+        self.btnSearchBy = ttk.Combobox(self, 
+                                        state = "readonly", 
+                                        font=('Century Gothic', 10), width=14, textvariable = SearchBy)
+        self.btnSearchBy['values'] = ("Rent Order","Borrower's ID","Name","Book Number","Borrowed Date", "Due Date","Return Date")
+        self.btnSearchBy.place(x=778,y=120)
         
-class Borrowers(tk.Frame):
+        
+        
+        displayReport()
+
+class History(tk.Frame):
 
      def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -2001,7 +2242,7 @@ class Borrowers(tk.Frame):
         leftcolor.place(x=0,y=0)
         
         
-        label = tk.Label(self, text="Borrower", bg="#90a3b0", font=("Century Gothic", 20))
+        label = tk.Label(self, text="History", bg="#90a3b0", font=("Century Gothic", 20))
         label.place(x=200,y=55)
         
         applogo = tk.Label(self, text="🕮", font=("Impact",70),bd=0,
@@ -2013,123 +2254,56 @@ class Borrowers(tk.Frame):
                             fg="snow",)
         apptitle.place(x=25,y=130)
         
-        BorrowerIDNum = StringVar()
-        ValidID = StringVar()
-        Name = StringVar()
-        EmailAdd = StringVar()
-        PhoneNum = StringVar()
-        Search = StringVar()
-        SearchAvail = StringVar()
-        Showby = StringVar()
-        Status = StringVar()
+        Search = StringVar() 
+        SearchBy = StringVar()
 
-        ##Functions
-        def addBorrower():
-            if BorrowerIDNum.get() == "" or ValidID.get() == "" or Name.get() == "" or EmailAdd.get() == "" or PhoneNum.get() == "":
-                tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
-            else:
-                conn = sqlite3.connect("BRS.db")
-                c = conn.cursor()
-                c2 = conn.cursor()
-                c2.execute("SELECT * FROM borrower")
-                borrowers = c2.fetchall()
-                list_of_valid_ids = []
-                for borrower in borrowers:
-                    list_of_valid_ids.append(borrower[1])
-                    
-                if ValidID.get() not in list_of_valid_ids:
-                    try:      
-                        c.execute("INSERT INTO borrower(BorrowerIDNum, ValidID, Name, EmailAdd, PhoneNum) VALUES (?,?,?,?,?)",\
-                                  (BorrowerIDNum.get(),ValidID.get(),Name.get(),EmailAdd.get(), PhoneNum.get()))
-                        conn.commit()           
-                        conn.close()
-                        clear()
-                        tkinter.messagebox.showinfo("Book Rental System", "Borrower has been recorded")
-                        displayBorrower()
-                    except:
-                        tkinter.messagebox.showerror("Book Rental System", "Borrower already recorded")
-                else:
-                    tkinter.messagebox.showerror("Book Rental System", "Valid ID already recorded")
-                
-        def displayBorrower():
-            self.borrower.delete(*self.borrower.get_children())
+        def displayHistory():
+            self.orderlist.delete(*self.orderlist.get_children())
             conn = sqlite3.connect("BRS.db")
             cur = conn.cursor()
-            cur.execute("SELECT * FROM borrower")
+            cur.execute("PRAGMA foreign_keys = ON")
+            cur.execute("SELECT * FROM history")
             rows = cur.fetchall()
             for row in rows:
-                self.borrower.insert("", tk.END, text=row[0], values=row[0:])
-            conn.close()
-            
-        def showAll():
-            displayBorrower()
-
-        def clear():
-            BorrowerIDNum.set('')
-            ValidID.set('')
-            Name.set('')
-            EmailAdd.set('')
-            PhoneNum.set('')
-            
-        def updateBorrower():
-            if BorrowerIDNum.get() == "" or ValidID.get() == "" or Name.get() == "" or EmailAdd.get() == "" or PhoneNum.get() == "":
-                tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
-            else:
-                for selected in self.borrower.selection():
-                    conn = sqlite3.connect("BRS.db")
-                    cur = conn.cursor()
-                    #cur.execute("PRAGMA foreign_keys = ON")
-                    cur.execute("UPDATE borrower SET BorrowerIDNum = ?,ValidID = ?, Name = ?, EmailAdd = ? ,PhoneNum = ? WHERE BorrowerIDNum=?", \
-                                (BorrowerIDNum.get(),ValidID.get(),Name.get(),EmailAdd.get(),PhoneNum.get(), self.borrower.set(selected, '#1')))   
-                    conn.commit()
-                    tkinter.messagebox.showinfo("Books Rental System", "Book Updated Successfully")
-                    displayBorrower()
-                    clear()
-                    conn.close()
-                    
-        def OnDoubleClick(event):
-            item = self.borrower.selection()[0]
-            values = self.borrower.item(item, "values")  
-            BorrowerIDNum.set(values[0])
-            ValidID.set(values[1])
-            Name.set(values[2])
-            EmailAdd.set(values[3])
-            PhoneNum.set(values[4])
-
-        def deleteBorrower():   
-            messageDelete = tkinter.messagebox.askyesno("Book Rental System", "Do you want to remove this book?")
-            if messageDelete > 0:   
-                con = sqlite3.connect("BRS.db")
-                cur = con.cursor()
-                x = self.borrower.selection()[0]
-                id_no = self.borrower.item(x)["values"][0]
-                #cur.execute("PRAGMA foreign_keys = ON")
-                cur.execute("DELETE FROM borrower WHERE BorrowerIDNum = ?",(id_no,))                    
-                con.commit()
-                self.borrower.delete(x)
-                tkinter.messagebox.showinfo("Book Rental System", "Borrower has been deleted")
-                displayBorrower()
-                clear()
-                con.close()
-                
-        def searchBorrower():
-            search = Search.get()                
+                self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+            conn.close()   
+        
+        def searchHistory():
+            search = Search.get()  
+            searchby = SearchBy.get()              
             con = sqlite3.connect("BRS.db")
             cur = con.cursor()
-            cur.execute("SELECT * FROM borrower WHERE BorrowerIDNum = ?",(search,))
+            cur.execute("SELECT * FROM history")
             con.commit()
-            self.borrower.delete(*self.borrower.get_children())
+            self.orderlist.delete(*self.orderlist.get_children())
             rows = cur.fetchall()
             for row in rows:
-                if row[0].startswith(search):
-                    self.borrower.insert("", tk.END, text=row[0], values=row[0:])
+                if searchby == 'Rent Order':
+                    if str(row[0]).count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Book ID':
+                    if row[1].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == "Borrower's ID":
+                    if row[2].startswith(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == 'Date Borrowed':
+                    if row[3].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
+                else:
+                    if row[4].count(search):
+                        self.orderlist.insert("", tk.END, text=row[0], values=row[0:])
             con.close()
+            
+        def Refresh():
+            displayHistory()
 
         def logout():
             iExit = tkinter.messagebox.askyesno("Book Rental Sysytem","Do you want to log-out?")
             if iExit > 0:
                 controller.show_frame(Login)
-
+                
+            
         ## Window Buttons
         
         button1 = tk.Button(self, text="⯀ DASHBOARD",font=("Century Gothic",13,"bold"),bd=0,
@@ -2156,20 +2330,20 @@ class Borrowers(tk.Frame):
         button3.place(x=15,y=330)
         button3.config(cursor= "hand2")
         
-        button4 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
+        button4 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 12,
+                            bg="grey17",
+                            fg="snow",
+                            command=lambda: controller.show_frame(Borrowers))
+        button4.place(x=21,y=380)
+        button4.config(cursor= "hand2")
+        
+        button5 = tk.Button(self, text="⯀ RENT   ",font=("Century Gothic",13,"bold"),bd=0,
                             width = 10,
                             bg="grey17",
                             fg="snow",
                             command=lambda: controller.show_frame(Order))
-        button4.place(x=10,y=380)
-        button4.config(cursor= "hand2")
-        
-        button5 = tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 10,
-                            bg="grey17",
-                            fg="snow",
-                            command=lambda: controller.show_frame(History))
-        button5.place(x=17,y=430)
+        button5.place(x=10,y=430)
         button5.config(cursor= "hand2")
         
         button6 = tk.Button(self, text="⯀ REPORT",font=("Century Gothic",13,"bold"),bd=0,
@@ -2180,12 +2354,12 @@ class Borrowers(tk.Frame):
         button6.place(x=13,y=480)
         button6.config(cursor= "hand2")
         
-        button7 = tk.Button(self, text="⯀ BORROWER",font=("Century Gothic",13,"bold"),bd=0,
-                            width = 12,
+        button7 =tk.Button(self, text="⯀ HISTORY",font=("Century Gothic",13,"bold"),bd=0,
+                            width = 10,
                             bg="grey17",
                             fg="#90a3b0",
-                            command=lambda: controller.show_frame(Borrowers))
-        button7.place(x=21,y=530)
+                            command=lambda: controller.show_frame(History))
+        button7.place(x=17,y=530)
         button7.config(cursor= "hand2")
 
         button8 = tk.Button(self, text="⯀ LOG-OUT",font=("Century Gothic",13,"bold"),bd=0,
@@ -2195,102 +2369,57 @@ class Borrowers(tk.Frame):
                             command=logout)
         button8.place(x=11,y=580)
         button8.config(cursor= "hand2")
-         
-        booklist = tk.Label(self,height = 2,width = 108, bg="#89E894")
         
-        self.borrower = ttk.Treeview(self,
-                                        columns=("Borrower's ID","Valid ID", "Name", "Email Add", "Phone Number"),
-                                        height = 13)
+        
+        
+        self.orderlist = ttk.Treeview(self,
+                                        columns=("Rent Order ID","Book ID","Borrower's ID","Date Borrowed","Due Date"),
+                                        height = 22)
+        
+        self.orderlist.heading("Rent Order ID", text="Rent Order ID",anchor=W)
+        self.orderlist.heading("Book ID", text="Book ID",anchor=W) 
+        self.orderlist.heading("Borrower's ID", text="Borrower's ID", anchor=W)
+        self.orderlist.heading("Date Borrowed", text="Date Borrowed", anchor=W)
+        self.orderlist.heading("Due Date", text="Due Date", anchor=W)
+        self.orderlist['show'] = 'headings'
 
-        self.borrower.heading("Borrower's ID", text="Borrower's ID", anchor=W)
-        self.borrower.heading("Valid ID", text="Valid ID",anchor=W)
-        self.borrower.heading("Name", text="Name",anchor=W)
-        self.borrower.heading("Email Add", text="Email Add",anchor=W)
-        self.borrower.heading("Phone Number", text="Phone Number",anchor=W)
-        self.borrower['show'] = 'headings'
-
-        self.borrower.column("Borrower's ID", width=200, anchor=W, stretch=False)
-        self.borrower.column("Valid ID", width=150, stretch=False)
-        self.borrower.column("Name", width=380, stretch=False)
-        self.borrower.column("Email Add", width=200, anchor=W, stretch=False)
-        self.borrower.column("Phone Number", width=180, anchor=W, stretch=False)
+        self.orderlist.column("Rent Order ID", width=150, anchor=W, stretch=False)
+        self.orderlist.column("Book ID", width=300, anchor=W, stretch=False)
+        self.orderlist.column("Borrower's ID", width=220, stretch=False)
+        self.orderlist.column("Date Borrowed", width=220, stretch=False)
+        self.orderlist.column("Due Date", width=220, stretch=False)
         
+        self.orderlist.place(x=200,y=180)
         
-        self.borrower.bind("<Double-1>",OnDoubleClick)
+        lblorderlist = tk.Label(self, font = ("Century Gothic",15), padx=3,width = 92, height = 1,text="List of All Transaction", anchor=W, bg="#375971", fg="snow")
+        lblorderlist.place(x=200,y=151)
         
-        self.borrower.place(x=200,y=180)
+        self.lblsearchby = Label(self, font=("Poppins", 12),anchor = W, text="SEARCH BY:", width = 72, padx=5, pady=5,bg="#90a3b0")
+        self.lblsearchby.place(x=650,y=116)
         
-        lblborrower = tk.Label(self, font = ("Century Gothic",15), padx = 3 ,width =92, height = 1,text="List of Borrowers",anchor=W, bg="#375971", fg="snow")
-        lblborrower.place(x=200,y=151)
+        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search,relief=FLAT, width=40)
+        self.txtSearch.place(x=900,y=120)
         
-        self.lblBBID = Label(self, font=("Poppins", 12, "bold"), text="Borrower ID Num:", padx=5, pady=5)
-        self.lblBBID.place(x=200,y=475)
-        self.txtBBID = Entry(self, font=("Poppins", 13), textvariable=BorrowerIDNum, width=38)
-        self.txtBBID.place(x=360,y=480)
+        #### Buttons
+                
+        self.btnShowallBook = Button(self, text="SHOW ALL", font=('Poppins', 11), height=1, width=10, bd=1, 
+                               bg="#90a3b0",command=Refresh)
+        self.btnShowallBook.place(x=200,y=118)
+        self.btnShowallBook.config(cursor= "hand2")
         
-        self.lblName = Label(self, font=("Poppins", 12, "bold"), text="Name:", padx=5, pady=5)
-        self.lblName.place(x=200,y=515)
-        self.txtName = Entry(self, font=("Poppins", 13), textvariable=Name, width=38)
-        self.txtName.place(x=360,y=520)
-        
-        self.lblVID = Label(self, font=("Poppins", 12, "bold"), text="Valid ID", padx=5, pady=5)
-        self.lblVID.place(x=200,y=555)
-        self.txtVID = Entry(self, font=("Poppins", 13), textvariable=ValidID, width=38)
-        self.txtVID.place(x=360,y=560)
-        
-        self.lblEMA = Label(self, font=("Poppins", 12, "bold"), text="Email Add", padx=5, pady=5)
-        self.lblEMA.place(x=200,y=595)
-        self.txtEMA = Entry(self, font=("Poppins", 13), textvariable=EmailAdd, width=38)
-        self.txtEMA.place(x=360,y=600)
-        
-        self.lblPN = Label(self, font=("Poppins", 12, "bold"), text="Phone Number", padx=5, pady=5)
-        self.lblPN.place(x=750,y=475)
-        self.txtPN= Entry(self, font=("Poppins", 13), textvariable=PhoneNum, width=38)
-        self.txtPN.place(x=890,y=480)
-        
-        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search, width=50)
-        self.txtSearch.place(x=800,y=120)
-        
-        
-        
-        #### Buttons 
-        
-        self.btnAddBook = Button(self, text="➕  ADD", font=('Poppins', 11), height=1, width=10, bd=1, 
-                               bg="#90a3b0", command=addBorrower)
-        self.btnAddBook.place(x=330,y=650)
-        self.btnAddBook.config(cursor= "hand2")
-        
-        self.btnUpdateBook = Button(self, text="⟲  UPDATE", font=('Poppins', 11), height=1, width=10, bd=1, 
-                               bg="#90a3b0",command=updateBorrower)
-        self.btnUpdateBook.place(x=455,y=650)
-        self.btnUpdateBook.config(cursor= "hand2")
-        
-        
-        
-        self.btnDeleteBook = Button(self, text="➖  DELETE", font=('Poppins', 11), height=1, width=10, bd=1, 
-                               bg="#90a3b0", command=deleteBorrower)
-        self.btnDeleteBook.place(x=585,y=650)
-        self.btnDeleteBook.config(cursor= "hand2")
-        
-        self.btnCLear = Button(self, text="CLEAR", font=('Poppins', 11), height=1, width=10, bd=1, 
-                               bg="#90a3b0", command=clear)
-        self.btnCLear.place(x=205,y=650)
-        self.btnCLear.config(cursor= "hand2")
-        
-        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 17),  bd=0, 
-                               command=searchBorrower)
-        self.btnSearchBook.place(x=1270,y=109)
+        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 13),  bd=0, bg="#90a3b0",
+                               command=searchHistory)
+        self.btnSearchBook.place(x=1270,y=116)
         self.btnSearchBook.config(cursor= "hand2")
         
-        self.btnShowallOrder = Button(self, text="SHOW ALL", font=('Poppins', 11), height=1, width=10, bd=1, 
-                               bg="#90a3b0", command = showAll)
-        self.btnShowallOrder.place(x=200,y=118)
-        self.btnShowallOrder.config(cursor= "hand2")
+        self.btnSearchBy = ttk.Combobox(self, 
+                                        state = "readonly", 
+                                        font=('Century Gothic', 10), width=14, textvariable = SearchBy)
+        self.btnSearchBy['values'] = ("Rent Order","Book ID","Borrower's ID","Date Borrowed","Due Date")
+        self.btnSearchBy.place(x=778,y=120)
         
+        displayHistory()         
 
-        displayBorrower()
-        
- 
 app = App()
 app.geometry("1360x700")
 app.mainloop()
