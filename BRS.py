@@ -360,9 +360,13 @@ class Dashboard(tk.Frame):
         def booksavail():
             conn = sqlite3.connect("BRS.db")
             cur = conn.cursor()
-            cur.execute("SELECT * FROM booksavailable")
+            cur2 = conn.cursor()
+            cur.execute("SELECT * FROM books")
+            cur2.execute("SELECT * FROM rent")
             rows = cur.fetchall()
-            tbooksavailable.set(len(rows))
+            rows2 = cur2.fetchall()
+            total = len(rows) - len(rows2)
+            tbooksavailable.set(total)
             self.ttlbooksavailable = Label(self, font=("Impact", 40),textvariable = tbooksavailable, bg ="#375971", fg = "snow")
             self.ttlbooksavailable.place(x=595,y=150)
             self.after(1000,booksavail)
@@ -628,9 +632,10 @@ class Books(tk.Frame):
                     if book[0]==rent[1]:
                         cur1.execute("UPDATE books SET BookNumber = ?,ISBN = ?, Title = ?, Author = ? ,Genre = ?, Status = 'Unavailable' WHERE BookNumber=?",\
                                      (book[0],book[1],book[2],book[3],book[4],book[0]))
-                        conn.commit()
+                        
                     else:
                         pass
+            conn.commit()
             conn.close()
         
         def updateBook():
@@ -648,7 +653,34 @@ class Books(tk.Frame):
                     displayBook()
                     clear()
                     conn.close()
-                                   
+        
+        def updateStatus():
+            if BookNumber.get() == "" or ISBN.get() == "" or Title.get() == "" or Author.get() == "" or Genre.get() == "":
+                tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
+            else:
+                conn = sqlite3.connect("BRS.db")
+                cur = conn.cursor()
+                cur1 = conn.cursor()
+                cur2 = conn.cursor()
+                cur1.execute("SELECT * FROM rent")
+                cur2.execute("SELECT * FROM books")
+                rents = cur1.fetchall()
+                rentlist = []
+                for rent in rents:
+                    rentlist.append(rent)
+                for selected in self.booklist.selection():
+                    if BookNumber.get() not in rentlist:
+                        #cur.execute("PRAGMA foreign_keys = ON")
+                        cur.execute("UPDATE books SET BookNumber = ?,ISBN = ?, Title = ?, Author = ? ,Genre = ?, Status = 'Available' WHERE BookNumber=?", \
+                                    (BookNumber.get(),ISBN.get(),Title.get(),Author.get(),Genre.get(), self.booklist.set(selected, '#1')))   
+                        conn.commit()
+                        tkinter.messagebox.showinfo("Books Rental System", "Book Updated Successfully")
+                        displayBook()
+                        clear()
+                        conn.close()
+                    else:
+                        pass
+                            
         def deleteBook():   
             messageDelete = tkinter.messagebox.askyesno("Book Rental System", "Do you want to remove this book?")
             if messageDelete > 0:   
@@ -891,6 +923,11 @@ class Books(tk.Frame):
                                bg="#90a3b0",command=updateBook)
         self.btnUpdateBook.place(x=455,y=650)
         self.btnUpdateBook.config(cursor= "hand2")
+        
+        self.btnUpdateStatus = Button(self, text="UPDATE STATUS", font=('Poppins', 11), height=1, width=15, bd=1, 
+                               bg="#90a3b0",command=updateStatus)
+        self.btnUpdateStatus.place(x=580,y=650)
+        self.btnUpdateStatus.config(cursor= "hand2")
         
         self.btnCLear = Button(self, text="CLEAR", font=('Poppins', 11), height=1, width=10, bd=1, 
                                bg="#90a3b0",command=clear)
@@ -1286,7 +1323,7 @@ class Borrowers(tk.Frame):
                     displayBorrower()
                     clear()
                     conn.close()
-                    
+                 
         def OnDoubleClick(event):
             item = self.borrower.selection()[0]
             values = self.borrower.item(item, "values")  
@@ -1480,7 +1517,6 @@ class Borrowers(tk.Frame):
         self.btnUpdateBook.place(x=455,y=650)
         self.btnUpdateBook.config(cursor= "hand2")
         
-        
         self.btnDeleteBook = Button(self, text="➖  DELETE", font=('Poppins', 11), height=1, width=10, bd=1, 
                                bg="#90a3b0", command=deleteBorrower)
         self.btnDeleteBook.place(x=585,y=650)
@@ -1602,19 +1638,28 @@ class Order(tk.Frame):
             if  BookNumber.get() == "" or BorrowersID.get() == "" or DateBorrowed == "":
                 tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
             else:
+                booklist = []
                 for selected in self.orderlist.selection():
                     conn = sqlite3.connect("BRS.db")
                     cur = conn.cursor()
                     cur1 = conn.cursor()
+                    cur2 = conn.cursor()
+                    cur1.execute("SELECT * FROM books")
+                    cur2.execute("SELECT * FROM rent")
                     books = cur1.fetchall()
+                    rents = cur2.fetchall()
                     cur.execute("PRAGMA foreign_keys = ON")
                     cur.execute("UPDATE rent SET  BookNumber = ?, BorrowersID = ?,  DateBorrowed = ?, DueDate = ?, ReturnDate = ? WHERE RentOrderNo=?", \
                                 (BookNumber.get(),BorrowersID.get(),DateBorrowed.get(),DueDate.get(),ReturnDate.get(), self.orderlist.set(selected, '#1'))) 
                     cur.execute("UPDATE history SET BookNumber = ?, BorrowersID = ?,  DateBorrowed = ?, DueDate = ?, ReturnDate = ? WHERE RentOrderNo=?",\
                                 (BookNumber.get(),BorrowersID.get(),DateBorrowed.get(),DueDate.get(),ReturnDate.get(), self.orderlist.set(selected, '#1')))
+                    """
                     for book in books: 
                         cur1.execute("UPDATE books SET BookNumber = ?, ISBN = ?, Title = ?, Author = ?, Genre = ?, Status = 'Unavailable' WHERE BookNumber = ?",
                                      (self.orderlist.set(selected, '#2'),book[1],book[2],book[3],book[4],self.orderlist.set(selected, '#2')))
+                        booklist.append(book[0])
+                    """
+                            
                     conn.commit()
                     tkinter.messagebox.showinfo("Books Rental System", "Order Updated Successfully")
                     displayOrder()
