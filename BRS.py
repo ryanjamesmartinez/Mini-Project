@@ -30,7 +30,7 @@ class App(tk.Tk):
 
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame(Order)
+        self.show_frame(Login)
 
     def show_frame(self, page_number):
 
@@ -1605,9 +1605,16 @@ class Order(tk.Frame):
                 for selected in self.orderlist.selection():
                     conn = sqlite3.connect("BRS.db")
                     cur = conn.cursor()
+                    cur1 = conn.cursor()
+                    books = cur1.fetchall()
                     cur.execute("PRAGMA foreign_keys = ON")
                     cur.execute("UPDATE rent SET  BookNumber = ?, BorrowersID = ?,  DateBorrowed = ?, DueDate = ?, ReturnDate = ? WHERE RentOrderNo=?", \
-                                (BookNumber.get(),BorrowersID.get(),DateBorrowed.get(),DueDate.get(),ReturnDate.get(), self.orderlist.set(selected, '#1')))   
+                                (BookNumber.get(),BorrowersID.get(),DateBorrowed.get(),DueDate.get(),ReturnDate.get(), self.orderlist.set(selected, '#1'))) 
+                    cur.execute("UPDATE history SET BookNumber = ?, BorrowersID = ?,  DateBorrowed = ?, DueDate = ?, ReturnDate = ? WHERE RentOrderNo=?",\
+                                (BookNumber.get(),BorrowersID.get(),DateBorrowed.get(),DueDate.get(),ReturnDate.get(), self.orderlist.set(selected, '#1')))
+                    for book in books: 
+                        cur1.execute("UPDATE books SET BookNumber = ?, ISBN = ?, Title = ?, Author = ?, Genre = ?, Status = 'Unavailable' WHERE BookNumber = ?",
+                                     (self.orderlist.set(selected, '#2'),book[1],book[2],book[3],book[4],self.orderlist.set(selected, '#2')))
                     conn.commit()
                     tkinter.messagebox.showinfo("Books Rental System", "Order Updated Successfully")
                     displayOrder()
@@ -1922,15 +1929,7 @@ class Report(tk.Frame):
             if str(book[5]) == 'Unavailable':
                 if book[5] not in bookid:
                     bookid.append(book[0])
-        """
-        cur.execute("SELECT * FROM rent")
-        bIDNum =[]
-        borrower=cur.fetchall()
-        for b in borrower:
-            if b[2] not in bIDNum:
-                bIDNum.append(b[2])
-        con.commit()
-        """
+            
         
         def addReport():
             if BNumber.get() == "" or RDate.get() == "":
@@ -1976,7 +1975,6 @@ class Report(tk.Frame):
                             except:
                                 tkinter.messagebox.showerror("Book Rental System", "Book ID or Borrower's ID does not exists")
                     
-              
         def displayReport():
             self.orderlist.delete(*self.orderlist.get_children())
             conn = sqlite3.connect("BRS.db")
@@ -1991,16 +1989,31 @@ class Report(tk.Frame):
             if BNumber.get() == "" or RDate.get() == "":
                 tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
             else:
-                for selected in self.orderlist.selection():
-                    conn = sqlite3.connect("BRS.db")
-                    cur = conn.cursor()
-                    cur.execute("UPDATE report SET BIDNum = ?, Name = ?, BookNumber = ?,DateBorrowed = ?, DueDate = ?, ReturnDate = ? WHERE ReportOrderNo = ?", \
-                                (BIDNum.get(), Name.get(),BNumber.get(), BDate.get(), DDate.get(),RDate.get(), self.orderlist.set(selected, '#1')))   
-                    conn.commit()
-                    tkinter.messagebox.showinfo("Books Rental System", "Book Updated Successfully")
-                    displayReport()
-                    clear()
-                    conn.close()
+                conn = sqlite3.connect("BRS.db")
+                cur = conn.cursor()
+                cur2 = conn.cursor()
+                cur2.execute("SELECT * from report")
+                reports = cur2.fetchall()
+                for report in reports:
+                    if BNumber.get() == report[3]:
+                        try:
+                            cur.execute("PRAGMA foreign_keys = ON")
+                            for selected in self.orderlist.selection():
+                                cur.execute("UPDATE report SET BIDNum = ?, Name = ?, BookNumber = ?, DateBorrowed = ?, DueDate = ?, ReturnDate = ? WHERE ReportOrderNo = ?", \
+                                            (self.orderlist.set(selected, '#2'), 
+                                             self.orderlist.set(selected, '#3'),
+                                             BNumber.get(), 
+                                             self.orderlist.set(selected, '#5'), 
+                                             self.orderlist.set(selected, '#6'),
+                                             RDate.get(), 
+                                             self.orderlist.set(selected, '#1')))   
+                                conn.commit()
+                                tkinter.messagebox.showinfo("Books Rental System", "Report Updated Successfully")
+                                displayReport()
+                                clear()
+                                conn.close()
+                        except:
+                            tkinter.messagebox.showerror("Book Rental System", "Update Failed")
                                    
         def deleteReport():   
             messageDelete = tkinter.messagebox.askyesno("Book Rental System", "Do you want to remove this transaction?")
@@ -2063,12 +2076,8 @@ class Report(tk.Frame):
         def OnDoubleClick(event):
             item = self.orderlist.selection()[0]
             values = self.orderlist.item(item, "values")  
-            BIDNum.set(values[0])
-            Name.set(values[1])
-            BNumber.set(values[2])
-            BDate.set(values[3])
-            DDate.set(values[4])
-            RDate.set(values[5])
+            BNumber.set(values[3])
+            RDate.set(values[6])
             
         def logout():
             iExit = tkinter.messagebox.askyesno("Book Rental Sysytem","Do you want to log-out?")
