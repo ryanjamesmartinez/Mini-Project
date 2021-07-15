@@ -30,7 +30,7 @@ class App(tk.Tk):
 
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame(Login)
+        self.show_frame(Order)
 
     def show_frame(self, page_number):
 
@@ -578,6 +578,7 @@ class Books(tk.Frame):
         SearchAvail = StringVar()
         Showby = StringVar()
         Status = StringVar()
+        Searchby = StringVar()
 
         def addBook():
             if BookNumber.get() == "" or ISBN.get() == "" or Title.get() == "" or Author.get() == "" or Genre.get() == "":
@@ -668,7 +669,8 @@ class Books(tk.Frame):
                     tkinter.messagebox.showinfo("Book Rental System", "Some people rented this book!")
                 
         def searchBook():
-            search = Search.get()                
+            search = Search.get()
+            searchby = Searchby.get()
             con = sqlite3.connect("BRS.db")
             cur = con.cursor()
             cur.execute("SELECT * FROM books")
@@ -676,20 +678,26 @@ class Books(tk.Frame):
             self.booklist.delete(*self.booklist.get_children())
             rows = cur.fetchall()
             for row in rows:
-                if row[0].startswith(search):
-                    self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-                if row[1].startswith(search):
-                    self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-                if row[2].count(search):
-                    self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-                if row[3].count(search):
-                    self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-                if row[4].count(search):
-                    self.booklist.insert("", tk.END, text=row[0], values=row[0:])
-                if row[5].startswith(search):
-                    self.booklist.insert("", tk.END, text=row[0], values=row[0:])
+                if searchby == "Book Number":
+                    if row[0].startswith(search):
+                        self.booklist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == "ISBN":
+                    if row[1].startswith(search):
+                        self.booklist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == "Title":
+                    if row[2].count(search):
+                        self.booklist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby =="Author":
+                    if row[3].count(search):
+                        self.booklist.insert("", tk.END, text=row[0], values=row[0:])
+                elif searchby == "Genre":
+                    if row[4].count(search):
+                        self.booklist.insert("", tk.END, text=row[0], values=row[0:])
+                else:
+                    if row[5].startswith(search):
+                        self.booklist.insert("", tk.END, text=row[0], values=row[0:])
             con.close()
-            
+        
         def searchAvailBook():
             search = SearchAvail.get()                
             con = sqlite3.connect("BRS.db")
@@ -831,6 +839,9 @@ class Books(tk.Frame):
         
         self.booklist.place(x=200,y=180)
         
+        self.lblsearchby = Label(self, font=("Poppins", 12),anchor = W, text="SEARCH BY:", width = 72, padx=5, pady=5,bg="#90a3b0")
+        self.lblsearchby.place(x=650,y=116)
+        
         lblbooklist = tk.Label(self, font = ("Century Gothic",15), padx = 3 ,width =92, height = 1,text="List of All Books",anchor=W, bg="#375971", fg="snow")
         lblbooklist.place(x=200,y=151)
         
@@ -859,8 +870,14 @@ class Books(tk.Frame):
         self.txtGenre= Entry(self, font=("Poppins", 13), textvariable=Genre, width=38)
         self.txtGenre.place(x=830,y=480)
         
-        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search, width=50)
-        self.txtSearch.place(x=800,y=120)
+        self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search, width=40)
+        self.txtSearch.place(x=900,y=120)
+
+        self.btnSearchBy = ttk.Combobox(self, 
+                                        state = "readonly", 
+                                        font=('Century Gothic', 10), width=14, textvariable = Searchby)
+        self.btnSearchBy['values'] = ("Book Number","ISBN", "Title", "Author", "Genre", "Status")
+        self.btnSearchBy.place(x=778,y=120)
                 
         
         #### Buttons 
@@ -880,9 +897,9 @@ class Books(tk.Frame):
         self.btnCLear.place(x=205,y=650)
         self.btnCLear.config(cursor= "hand2")
         
-        self.btnSearchBook = Button(self, text="🔍", font=('Poppins', 17),  bd=0, 
-                               command=searchBook)
-        self.btnSearchBook.place(x=1270,y=109)
+        self.btnSearchBook = Button(self,  text="🔍",font= ('Poppins', 13),  bd=0, 
+                               command=searchBook, bg="#90a3b0")
+        self.btnSearchBook.place(x=1280,y=116)
         self.btnSearchBook.config(cursor= "hand2")
         
         self.btnShowallBook = Button(self, text="SHOW ALL", font=('Poppins', 11), height=1, width=10, bd=1, 
@@ -1131,6 +1148,7 @@ class Genres(tk.Frame):
         self.booklist.bind("<Double-1>",OnDoubleClick2)
     
         self.booklist.place(x=530,y=180)
+        
         
         lblorderlist = tk.Label(self, font = ("Century Gothic",15), padx=6,width = 24, height = 1,text="Genres",anchor=W, bg="#375971", fg="snow")
         lblorderlist.place(x=200,y=151)
@@ -1494,7 +1512,6 @@ class Borrowers(tk.Frame):
         displayBorrower()
                 
 class Order(tk.Frame):
-
      def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -1687,13 +1704,14 @@ class Order(tk.Frame):
         books = cur.fetchall()
         bookid = []
         for book in books:
-             bookid.append(book[0])
+            if str(book[5]) == 'Available':
+                bookid.append(book[0])
 
         cur.execute("SELECT * FROM borrower")
         borrower=cur.fetchall()
         bIDNum =[]
         for b in borrower:
-            bIDNum.append(b[0])
+            bIDNum.append(b[0]) 
             
         
         ## Window Buttons
@@ -1782,6 +1800,8 @@ class Order(tk.Frame):
         self.orderlist.bind("<Double-1>",OnDoubleClick)
         
         self.orderlist.place(x=600,y=180)
+
+        
         
         lblorderlist = tk.Label(self, font = ("Century Gothic",15), padx=3,width = 57, height = 1,text="List of Rents",anchor=W, bg="#375971", fg="snow")
         lblorderlist.place(x=600,y=151)
@@ -1896,20 +1916,24 @@ class Report(tk.Frame):
         con = sqlite3.connect("BRS.db")
         cur = con.cursor()
         cur.execute("SELECT * FROM books")
-        books = cur.fetchall()
         bookid = []
+        books = cur.fetchall()
         for book in books:
             if str(book[5]) == 'Unavailable':
-                bookid.append(book[0])
-
+                if book[5] not in bookid:
+                    bookid.append(book[0])
+        """
         cur.execute("SELECT * FROM rent")
-        borrower=cur.fetchall()
         bIDNum =[]
+        borrower=cur.fetchall()
         for b in borrower:
-            bIDNum.append(b[2])
+            if b[2] not in bIDNum:
+                bIDNum.append(b[2])
+        con.commit()
+        """
         
         def addReport():
-            if BIDNum.get() == "" or BNumber.get() == "" or RDate.get() == "":
+            if BNumber.get() == "" or RDate.get() == "":
                     tkinter.messagebox.showerror("Book Rental System", "Please fill in the box")
             else: 
                 conn = sqlite3.connect("BRS.db")
@@ -1923,37 +1947,35 @@ class Report(tk.Frame):
                 books = cur2.fetchall()
                 rents = cur3.fetchall()
                 Name = ""
-                for borrower in borname:
-                    if BIDNum.get() == borrower[0]:
-                        Name = borrower[2]
-                        try:
-                            cur.execute("PRAGMA foreign_keys = ON")
-                            for rent in rents:
-                                if str(BNumber.get()) == str(rent[1]):
+                for rent in rents:
+                    for borrower in borname:
+                        if BNumber.get() == rent[1]:
+                            try:
+                                cur.execute("PRAGMA foreign_keys = ON")
+                                if rent[2] == borrower[0]:
+                                    Name = borrower[2]
                                     cur.execute("DELETE FROM rent WHERE RentOrderNo = ?",(rent[0],))   
                                     cur.execute("INSERT INTO report (BIDNum, Name, BookNumber, DateBorrowed, DueDate, ReturnDate) VALUES (?,?,?,?,?,?)",\
-                                          (BIDNum.get(), Name,BNumber.get(), rent[3], rent[4],RDate.get()))  
-                                else:
-                                    pass
-                                
-                            for book in books:
-                                if str(BNumber.get()) == str(book[0]):
-                                    cur2.execute("UPDATE books SET BookNumber = ?, ISBN = ?, Title = ?, Author = ?, Genre = ?, Status = 'Available' WHERE BookNumber = ?",
-                                                 (BNumber.get(),book[1],book[2],book[3],book[4],BNumber.get()))  
-                                    cur2.execute("INSERT INTO booksavailable (BookNumber, ISBN, Title, Author, Genre) VALUES (?,?,?,?,?)",\
-                                                 (BNumber.get(),book[1],book[2],book[3],book[4]))
-                                    cur2.execute("INSERT INTO return (BookNumber, ISBN, Title, Author, Genre) VALUES (?,?,?,?,?)",\
-                                                 (BNumber.get(),book[1],book[2],book[3],book[4]))
-                                else:
-                                    pass
-                            
-                            conn.commit()           
-                            conn.close()
-                            clear()
-                            tkinter.messagebox.showinfo("Book Rental System", "Added to Report")
-                            displayReport()
-                        except:
-                            tkinter.messagebox.showerror("Book Rental System", "Book ID or Borrower's ID does not exists")
+                                               (rent[2], Name,BNumber.get(), rent[3], rent[4],RDate.get()))
+                                    for book in books:
+                                        if str(BNumber.get()) == str(book[0]):
+                                            cur2.execute("UPDATE books SET BookNumber = ?, ISBN = ?, Title = ?, Author = ?, Genre = ?, Status = 'Available' WHERE BookNumber = ?",
+                                                         (BNumber.get(),book[1],book[2],book[3],book[4],BNumber.get()))  
+                                            cur2.execute("INSERT INTO booksavailable (BookNumber, ISBN, Title, Author, Genre) VALUES (?,?,?,?,?)",\
+                                                         (BNumber.get(),book[1],book[2],book[3],book[4]))
+                                            cur2.execute("INSERT INTO return (BookNumber, ISBN, Title, Author, Genre) VALUES (?,?,?,?,?)",\
+                                                         (BNumber.get(),book[1],book[2],book[3],book[4]))
+                                        else:
+                                            pass
+                                    
+                                    conn.commit()           
+                                    conn.close()
+                                    clear()
+                                    tkinter.messagebox.showinfo("Book Rental System", "Added to Report")
+                                    displayReport()
+                            except:
+                                tkinter.messagebox.showerror("Book Rental System", "Book ID or Borrower's ID does not exists")
+                    
               
         def displayReport():
             self.orderlist.delete(*self.orderlist.get_children())
@@ -1966,7 +1988,7 @@ class Report(tk.Frame):
             conn.close()
         
         def updateReport():
-            if BIDNum.get() == "" or Name.get() == "" or BNumber.get() == "" or BDate.get() == "" or DDate.get() == "" or RDate.get() == "":
+            if BNumber.get() == "" or RDate.get() == "":
                 tkinter.messagebox.showerror("Book Rental System","Please fill in the blank.")
             else:
                 for selected in self.orderlist.selection():
@@ -2151,21 +2173,22 @@ class Report(tk.Frame):
         self.lblsearchby = Label(self, font=("Poppins", 12),anchor = W, text="SEARCH BY:", width = 72, padx=5, pady=5,bg="#90a3b0")
         self.lblsearchby.place(x=650,y=116)
         
-        
+        """
         self.lblBorrowerID = Label(self, font=("Poppins", 12, "bold"), text="Borrower's ID Num:", padx=5, pady=5)
         self.lblBorrowerID.place(x=200,y=475)
         self.txtBorrowerID = ttk.Combobox(self,
                                         values = bIDNum,
                                         state="readonly", font=("Poppins", 13), textvariable=BIDNum, width=38)
         self.txtBorrowerID.place(x=360,y=480)
+        """
         
         self.lblBookNum = Label(self, font=("Poppins", 12, "bold"), text="Book Number:", padx=5, pady=5)
-        self.lblBookNum.place(x=200,y=515)
+        self.lblBookNum.place(x=200,y=475)
         
         self.txtBookNum =ttk.Combobox(self,
                                         values = bookid,
                                         state="readonly", font=("Poppins", 13), textvariable=BNumber, width=38)
-        self.txtBookNum.place(x=360,y=520)
+        self.txtBookNum.place(x=360,y=480)
         
         #self.lblBDate = Label(self, font=("Poppins", 12, "bold"), text="Borrow Date:", padx=5, pady=5)
         #self.lblBDate.place(x=750,y=415)
@@ -2179,7 +2202,7 @@ class Report(tk.Frame):
         
         self.lblRDate = Label(self, font=("Poppins", 12, "bold"), text="Return Date:", padx=5, pady=5)
         self.lblRDate.place(x=750,y=475)
-        self.txtRDate = DateEntry(self, font=("Poppins", 13), state="readonly", textvariable=RDate, width=38,year=2021, month=7, day=7, bg="#375971", fg="snow")
+        self.txtRDate = DateEntry(self, font=("Poppins", 13), state="readonly", textvariable=RDate, width=42,year=2021, month=7, day=7, bg="#375971", fg="snow")
         self.txtRDate.place(x=890,y=480)
         
         self.txtSearch = Entry(self, font=("Poppins", 13), textvariable=Search,relief=FLAT, width=40)
@@ -2222,9 +2245,7 @@ class Report(tk.Frame):
                                         font=('Century Gothic', 10), width=14, textvariable = SearchBy)
         self.btnSearchBy['values'] = ("Rent Order","Borrower's ID","Name","Book Number","Borrowed Date", "Due Date","Return Date")
         self.btnSearchBy.place(x=778,y=120)
-        
-        
-        
+  
         displayReport()
 
 class History(tk.Frame):
